@@ -7,7 +7,7 @@
     </listeners>
 
     <parameter name="browser" value="chrome"/>
-    <parameter name="url" value="http://mbusa.com"/>
+    <parameter name="url" value=""/>
 
     <test name="test">
     </test>

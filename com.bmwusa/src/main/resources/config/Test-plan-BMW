@@ -1,0 +1,6 @@
+Test cases 1:set up the location
+1- click on location botton
+2- sendkey to zip code
+3- click on search
+4- click on wanted location
+5- assert true if result equal //div[@class='filterable-list-view__detail-header--content']

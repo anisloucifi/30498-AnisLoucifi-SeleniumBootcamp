@@ -60,8 +60,11 @@ public class BasePage {
         ExtentTestManager.startTest(methodName);
         ExtentTestManager.getTest().assignCategory(className);
     }
+public BasePage(){
+        dataInit();
+        databaseInit();
+}
 
-    @BeforeMethod(alwaysRun = true)
     public void databaseInit() {
         String host = dbConfig.get(BaseConfig.DBProperties.HOST);
         String user = dbConfig.get(BaseConfig.DBProperties.USER);
@@ -71,14 +74,14 @@ public class BasePage {
         db = new Database(host, user, password, className);
     }
 
-    @BeforeMethod(alwaysRun = true)
+
     public void dataInit() {
         excel = new ExcelData(DATA_PATH);
     }
 
     @Parameters({"driverConfigEnabled", "browser", "url"})
     @BeforeMethod
-    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("http://mbusa.com") String url) {
+    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("http://bmwusa.com") String url) {
         if (Boolean.parseBoolean(driverConfigEnabled)) {
             driverInit(browser);
             driver.get(url);
