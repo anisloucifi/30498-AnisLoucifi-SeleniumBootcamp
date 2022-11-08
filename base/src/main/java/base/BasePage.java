@@ -81,13 +81,21 @@ public BasePage(){
 
     @Parameters({"driverConfigEnabled", "browser", "url"})
     @BeforeMethod
-    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("http://automationpractice.com/index.php") String url) {
+    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("https://www.bmwusa.com/") String url) {
         if (Boolean.parseBoolean(driverConfigEnabled)) {
             driverInit(browser);
             driver.get(url);
             driver.manage().deleteAllCookies();
             driver.manage().window().maximize();
         }
+    }
+    public void waitForVisibilityOfElement(WebElement element){
+        webDriverWait.until(ExpectedConditions.visibilityOf(element));
+    }
+    public void  moveToElementAndClick(WebElement element){
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(element));
+        Actions actions =new Actions(driver);
+        actions.moveToElement(element).click().perform();
     }
 
     @Parameters({"driverConfigEnabled"})
