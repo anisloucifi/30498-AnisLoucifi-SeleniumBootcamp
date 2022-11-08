@@ -17,8 +17,13 @@ public class MyAccountPage extends BasePage {
     @FindBy (id="contact-link")
     public WebElement contactButton;
 
+
     public boolean isSingOutLinkDisplay() {
         return isElementVisible(singOutLink);
     }
+    public MyAdressesPage clickOnAdresses() {
+        clickOnElement(addresses);
+        return new MyAdressesPage();
 
-}
+    }
+    }
