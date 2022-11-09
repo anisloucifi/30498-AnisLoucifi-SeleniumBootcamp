@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.*;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import org.testng.annotations.Optional;
 import reporting.ExtentManager;
 import reporting.ExtentTestManager;
 import utils.Database;
@@ -26,10 +27,7 @@ import utils.ExcelData;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class BasePage {
 
@@ -181,6 +179,14 @@ public BasePage(){
         }
 
         return text;
+    }
+    public List<String> getListTrimmedElements(List<WebElement> listElements) {
+        List<String> list = new ArrayList<String>();
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(listElements));
+        for (WebElement element : listElements) {
+            list.add(getTrimmedElementText(element));
+        }
+        return list;
     }
 
     public void clickOnElement(WebElement element) {

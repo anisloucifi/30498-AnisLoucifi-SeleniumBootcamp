@@ -8,7 +8,6 @@ import java.util.List;
 public class HomePage extends BasePage {
 
 
-
     public HomePage() {
         PageFactory.initElements(driver, this);
     }
@@ -18,16 +17,14 @@ public class HomePage extends BasePage {
     public WebElement searchField;
 
 
-
     @FindBy(xpath = "//a[@title='Search apartments for rent']")
     public WebElement searchButton;
 
     @FindBy(id = "headerMenuLink")
     public WebElement headerMenu;
 
-    @FindBy (xpath = "//ul[@id='menuNavigation']/li/a")
+    @FindBy(xpath = "//ul[@id='menuNavigation']/li/a")
     public List<WebElement> Menu;
-
 
 
     @FindBy(xpath = "//a[@title='Sign In']")
@@ -45,10 +42,10 @@ public class HomePage extends BasePage {
     @FindBy(id = "loginButton")
     public WebElement signInButton;
 
-    @FindBy(xpath = "//div[@class='validation-error invalid-credentials']")
+    @FindBy(xpath = "//div[@id='login-password-panel']/div[1]/div/div[2]")
     public WebElement errorMessage;
-
-
+    @FindBy(id = "username")
+    public WebElement usernameButton;
 
 
     //method region
@@ -60,18 +57,21 @@ public class HomePage extends BasePage {
     public void clickOnSearchButton() {
         clickOnElement(searchButton);
     }
-//    public SearchResultPage doSearch(String searchTerm) {
-//        inputSearchField(searchTerm);
-//        clickOnSearchButton();
-//        return new SearchResultPage();
-//    }
-    public void clickOnMenu(){
+
+        public SearchResultPage doSearch(String searchTerm) {
+        inputSearchField(searchTerm);
+        clickOnSearchButton();
+        return new SearchResultPage();
+    }
+    public void clickOnMenu() {
         safeClickOnElement(headerMenu);
     }
-    public void clickOnSubMenu(String subMenu){
-        for(WebElement element : Menu){
-            if(getTrimmedElementText(element).equals(subMenu)){
-                safeClickOnElement(element);break;
+
+    public void clickOnSubMenu(String subMenu) {
+        for (WebElement element : Menu) {
+            if (getTrimmedElementText(element).equals(subMenu)) {
+                safeClickOnElement(element);
+                break;
             }
         }
     }
@@ -95,29 +95,36 @@ public class HomePage extends BasePage {
 //        return new FavoritesPage();
 
 
-    public void clickOnSignInLink(){
+    public void clickOnSignInLink() {
         safeClickOnElement(SignInLink);
     }
-    public void switchToSignInFrame(){
+
+    public void switchToSignInFrame() {
         switchToFrameByElement(signInIframe);
     }
-    public void enterUsername(String userName){
-        clearSendKeysToElement(usernameField,userName);
+
+    public void enterUsername(String userName) {
+        clearSendKeysToElement(usernameField, userName);
     }
-    public void enterPassword(String password){
-        clearSendKeysToElement(passwordField,password);
+
+    public void enterPassword(String password) {
+        clearSendKeysToElement(passwordField, password);
     }
-    public void clickOnSignInButton(){
+
+    public void clickOnSignInButton() {
         safeClickOnElement(signInButton);
     }
-    public void doSignIn(String userName , String password){
+
+    public void doSignIn(String userName, String password) {
         clickOnSignInLink();
         switchToSignInFrame();
         enterUsername(userName);
         enterPassword(password);
         clickOnSignInButton();
     }
-    public String getErrorLoginMessage(){
+
+
+    public String getErrorLoginMessage() {
         return getTrimmedElementText(errorMessage);
     }
 }
