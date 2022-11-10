@@ -32,7 +32,7 @@ public class SearchResultPage extends BasePage {
     public WebElement sortButton;
 
     @FindBy(xpath = "//ul[@class='sortMenu']//li")
-    public List<WebElement> sortingOptions;
+    public List<WebElement> sortingList;
 
 
 
@@ -84,6 +84,32 @@ public boolean getFavoriteCount(){
          }
          return false;
      }
+    public void clickOnSortButton() {
+        safeClickOnElement(sortButton);
+    }
+
+    public void selectDropDawnSorting(String option) {
+        for (WebElement element : sortingList) {
+            if (getTrimmedElementText(element).equals(option)) {
+                safeClickOnElement(element);
+                break;
+            }
+        }
+
+
+    }
+
+    public List<Integer> sortedPrice(){
+        List<Integer> prices = getListPrices();
+        List<Integer> sortedprices = new ArrayList<>(prices);
+        Collections.sort(sortedprices,Collections.reverseOrder());
+        return sortedprices;
+    }
+    public void doSort(String option) {
+        clickOnSortButton();
+        selectDropDawnSorting(option);
+    }
+
 
 }
 

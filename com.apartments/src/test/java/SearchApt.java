@@ -29,4 +29,24 @@ public class SearchApt extends BasePage {
     Assert.assertTrue(search.isMatched(700,1200),"");
 
 }
+@Test
+    public void testSortingLowToHigh(){
+    HomePage hp = new HomePage();
+    String[][] data = excel.readStringArrays("location");
+    SearchResultPage search = hp.doSearch(data[0][0]);
+    search.doSort("Rent (low to high)");
+    List<Integer> prices = search.getListPrices();
+    Assert.assertTrue(prices.equals(search.sortedPrice()));
+
+}
+@Test
+    public void testSrtingHightoLow(){
+    HomePage hp = new HomePage();
+    String[][] data = excel.readStringArrays("location");
+    SearchResultPage search = hp.doSearch(data[0][0]);
+    search.doSort("Rent (high to low)");
+    List<Integer> prices = search.getListPrices();
+    Assert.assertTrue(prices.equals(search.sortedPrice()));
+
+}
 }
