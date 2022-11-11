@@ -9,6 +9,7 @@ public class HomePage extends BasePage {
 
 
     public HomePage() {
+
         PageFactory.initElements(driver, this);
     }
 
@@ -25,6 +26,8 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//ul[@id='menuNavigation']/li/a")
     public List<WebElement> Menu;
+    @FindBy (xpath = "//li[@tabindex='0']//a")
+    public List<WebElement> subMenu;
 
 
     @FindBy(xpath = "//a[@title='Sign In']")
@@ -75,24 +78,20 @@ public class HomePage extends BasePage {
             }
         }
     }
-//    public void clickOnSubSubMenu(String subSubMenu){
-//        for(WebElement element : SubMenu){
-//            if(getTrimmedElementText(element).equals(subSubMenu)){
-//                safeClickOnElement(element);break;
-//            }
-//        }
-//    }
-//    public RentalCalculatorPage clickOnRentalCalculator(){
-//        clickOnMenu();
-//        clickOnSubMenu("Renter Tools");
-//        clickOnSubSubMenu("Rental Calculator");
-//        return new RentalCalculatorPage();
+    public void clickOnSubOfSubMenu(String Option){
+        for(WebElement element : subMenu){
+            if(getTrimmedElementText(element).equals(Option)){
+                safeClickOnElement(element);break;
+            }
+        }
+      }
+    public RentalCalculatorPage navigatetoRentalCalculate() {
+        clickOnMenu();
+        clickOnSubMenu("Renter Tools");
+        clickOnSubOfSubMenu("Rental Calculator");
+        return new RentalCalculatorPage();
 
-//    public FavoritesPage clickOnFavorites(){
-//        clickOnMenu();
-//        clickOnSubMenu("Renter Tools");
-//        clickOnSubSubMenu("Favorites");
-//        return new FavoritesPage();
+    }
 
 
     public void clickOnSignInLink() {
