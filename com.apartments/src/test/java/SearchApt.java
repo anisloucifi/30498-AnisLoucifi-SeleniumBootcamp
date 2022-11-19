@@ -10,7 +10,7 @@ public class SearchApt extends BasePage {
         HomePage hp = new HomePage();
         String[][] data = excel.readStringArrays("location");
         SearchResultPage search = hp.doSearch(data[0][0]);
-        Assert.assertTrue(search.isDisplay(),"");
+        Assert.assertTrue(search.doSearchResultMatchCity(data[0][0]),"");
     }
     @Test
     public void testFavorite()  {

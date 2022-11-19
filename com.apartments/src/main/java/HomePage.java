@@ -16,7 +16,7 @@ public class HomePage extends BasePage {
     }
 
     //WebElement
-    @FindBy (id = "headerAddProperty")
+    @FindBy(id = "headerAddProperty")
     public WebElement addPropButton;
     @FindBy(id = "quickSearchLookup")
     public WebElement searchField;
@@ -30,7 +30,7 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//ul[@id='menuNavigation']/li/a")
     public List<WebElement> Menu;
-    @FindBy (xpath = "//li[@tabindex='0']//a")
+    @FindBy(xpath = "//li[@tabindex='0']//a")
     public List<WebElement> subMenu;
 
 
@@ -65,11 +65,12 @@ public class HomePage extends BasePage {
         clickOnElement(searchButton);
     }
 
-        public SearchResultPage doSearch(String searchTerm) {
+    public SearchResultPage doSearch(String searchTerm) {
         inputSearchField(searchTerm);
         clickOnSearchButton();
         return new SearchResultPage();
     }
+
     public void clickOnMenu() {
         safeClickOnElement(headerMenu);
     }
@@ -82,13 +83,16 @@ public class HomePage extends BasePage {
             }
         }
     }
-    public void clickOnSubOfSubMenu(String Option){
-        for(WebElement element : subMenu){
-            if(getTrimmedElementText(element).equals(Option)){
-                safeClickOnElement(element);break;
+
+    public void clickOnSubOfSubMenu(String Option) {
+        for (WebElement element : subMenu) {
+            if (getTrimmedElementText(element).equals(Option)) {
+                safeClickOnElement(element);
+                break;
             }
         }
-      }
+    }
+
     public RentalCalculatorPage navigatetoRentalCalculate() {
         clickOnMenu();
         clickOnSubMenu("Renter Tools");
@@ -130,10 +134,11 @@ public class HomePage extends BasePage {
 
 
     public String getErrorLoginMessage() {
+
         return getTrimmedElementText(errorMessage);
     }
 
-    public AddPropertyPage clickOnAddProperty(){
+    public AddPropertyPage clickOnAddProperty() {
         safeClickOnElement(addPropButton);
         return new AddPropertyPage();
     }

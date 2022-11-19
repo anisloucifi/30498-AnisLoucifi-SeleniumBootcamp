@@ -14,8 +14,9 @@ public class SearchResultPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//section[@class='placard-content']")
+    @FindBy(xpath = "//div[@id='placardContainer']/ul/li[@class='mortar-wrapper']//header//a[@class='property-link']")
     public List<WebElement> listApartm;
+
     @FindBy(xpath = "//div[@id='placardContainer']/ul/li[1]/article/header/div[3]/a")
     public WebElement favoriteButton;
     @FindBy (id = "notificationsFavoritesCount")
@@ -37,12 +38,15 @@ public class SearchResultPage extends BasePage {
 
 
 
-    public boolean isDisplay() {
-    if (listApartm.size() == 25) {
-        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(listApartm));
+    public boolean doSearchResultMatchCity(String searchtirm) {
+        for(WebElement element : listApartm ){
+           String city = element.getAttribute("aria-label");
+           if(!city.toLowerCase().contains(searchtirm.toLowerCase())){
+               return false;
+           }
+        }
         return true;
-    }else  return  false;
-}
+    }
 public void clickOnFavorite(){
     clickOnElement(favoriteButton);
 }
@@ -56,7 +60,7 @@ public boolean getFavoriteCount(){
     sendKeysToElement(minPrice,min);
     sendKeysToElement(maxPrice,max);
     clickOnElement(sortButton);
-    webDriverWait.until(ExpectedConditions.visibilityOfAllElements(listPrices));
+    //webDriverWait.until(ExpectedConditions.visibilityOfAllElements(listPrices));
 
      }
      public List<Integer> getListPrices(){
