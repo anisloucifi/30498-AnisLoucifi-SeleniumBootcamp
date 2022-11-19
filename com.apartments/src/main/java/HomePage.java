@@ -2,7 +2,9 @@ import base.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.nio.file.WatchEvent;
 import java.util.List;
 
 public class HomePage extends BasePage {
@@ -14,6 +16,8 @@ public class HomePage extends BasePage {
     }
 
     //WebElement
+    @FindBy (id = "headerAddProperty")
+    public WebElement addPropButton;
     @FindBy(id = "quickSearchLookup")
     public WebElement searchField;
 
@@ -99,6 +103,7 @@ public class HomePage extends BasePage {
     }
 
     public void switchToSignInFrame() {
+
         switchToFrameByElement(signInIframe);
     }
 
@@ -116,6 +121,7 @@ public class HomePage extends BasePage {
 
     public void doSignIn(String userName, String password) {
         clickOnSignInLink();
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(signInIframe));
         switchToSignInFrame();
         enterUsername(userName);
         enterPassword(password);
@@ -125,5 +131,10 @@ public class HomePage extends BasePage {
 
     public String getErrorLoginMessage() {
         return getTrimmedElementText(errorMessage);
+    }
+
+    public AddPropertyPage clickOnAddProperty(){
+        safeClickOnElement(addPropButton);
+        return new AddPropertyPage();
     }
 }

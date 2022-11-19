@@ -36,7 +36,7 @@ public class SearchApt extends BasePage {
     SearchResultPage search = hp.doSearch(data[0][0]);
     search.doSort("Rent (low to high)");
     List<Integer> prices = search.getListPrices();
-    Assert.assertTrue(prices.equals(search.sortedPrice()));
+    Assert.assertTrue(prices.equals(search.sortedPriceLowtoHeghit()));
 
 }
 @Test

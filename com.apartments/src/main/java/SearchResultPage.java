@@ -105,6 +105,12 @@ public boolean getFavoriteCount(){
         Collections.sort(sortedprices,Collections.reverseOrder());
         return sortedprices;
     }
+    public List<Integer> sortedPriceLowtoHeghit(){
+        List<Integer> prices = getListPrices();
+        List<Integer> sortedprices = new ArrayList<>(prices);
+        Collections.sort(sortedprices);
+        return sortedprices;}
+
     public void doSort(String option) {
         clickOnSortButton();
         selectDropDawnSorting(option);

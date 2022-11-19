@@ -19,6 +19,10 @@ public class CalculateRental extends BasePage {
     }
     @Test
     public void testCalculate50percent(){
+        HomePage hp = new HomePage();
+        RentalCalculatorPage rental= hp.navigatetoRentalCalculate();
+        rental.enterMonthlyIncome("4000");
+        Assert.assertEquals(rental.getResult(),rental.getValueBaseOnRate(4000,50));
 
     }
 }
