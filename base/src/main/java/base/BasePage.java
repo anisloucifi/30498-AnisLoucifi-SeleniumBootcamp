@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.*;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import org.testng.annotations.Optional;
 import reporting.ExtentManager;
 import reporting.ExtentTestManager;
 import utils.Database;
@@ -26,10 +27,7 @@ import utils.ExcelData;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class BasePage {
 
@@ -81,7 +79,7 @@ public BasePage(){
 
     @Parameters({"driverConfigEnabled", "browser", "url"})
     @BeforeMethod
-    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("http://bmwusa.com") String url) {
+    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("https://freecrm.com") String url) {
         if (Boolean.parseBoolean(driverConfigEnabled)) {
             driverInit(browser);
             driver.get(url);
@@ -341,6 +339,14 @@ public BasePage(){
         } catch (Exception e) {
             System.out.println("ERROR TAKING FULL SCREENSHOT: " + e.getMessage());
         }
+    }
+    public List<String> getTextListTrimmedTextElements(List<WebElement> listElements) {
+        List<String> trimmedText = new ArrayList<String>();
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(listElements));
+        for (WebElement element : listElements) {
+            trimmedText.add(getTrimmedElementText(element));
+        }
+        return trimmedText;
     }
 
     private static Date getTime(long millis) {
