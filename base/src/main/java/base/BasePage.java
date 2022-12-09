@@ -79,7 +79,7 @@ public BasePage(){
 
     @Parameters({"driverConfigEnabled", "browser", "url"})
     @BeforeMethod
-    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("https://freecrm.com") String url) {
+    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("https://www.ebay.com") String url) {
         if (Boolean.parseBoolean(driverConfigEnabled)) {
             driverInit(browser);
             driver.get(url);
@@ -340,6 +340,7 @@ public BasePage(){
             System.out.println("ERROR TAKING FULL SCREENSHOT: " + e.getMessage());
         }
     }
+    //add method
     public List<String> getTextListTrimmedTextElements(List<WebElement> listElements) {
         List<String> trimmedText = new ArrayList<String>();
         webDriverWait.until(ExpectedConditions.visibilityOfAllElements(listElements));
