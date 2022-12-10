@@ -74,10 +74,13 @@ public class CalendarPage extends BasePage {
         clickOnAddButton();
         clickOnCloseButton();
     }
-    public List<String> getListCalendar(){
-        webDriverWait.until(ExpectedConditions.invisibilityOfAllElements(calendarsIcon));
-        return  getTextListTrimmedTextElements(listCalendar);
-    }
+//    public List<String> getListCalendar(){
+//        webDriverWait.until(ExpectedConditions.invisibilityOfAllElements(calendarsIcon));
+//        return  getTextListTrimmedTextElements(listCalendar);
+//    }
+
+
+
     public void deletCalendar(String calendar){
         for(WebElement element : calendarsIcon){
             if(getTrimmedElementText(element).equals(calendar)) {
