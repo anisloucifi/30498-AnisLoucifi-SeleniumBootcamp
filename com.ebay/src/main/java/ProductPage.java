@@ -1,14 +1,13 @@
 import base.BasePage;
-import org.apache.batik.apps.svgbrowser.JSVGViewerFrame;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.devtools.v85.backgroundservice.BackgroundService;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ProdectPage extends BasePage {
-    public ProdectPage(){
+public class ProductPage extends BasePage {
+    public ProductPage(){
         PageFactory.initElements(driver,this);
     }
+
     @FindBy(xpath = "//span[text()='Add to cart']")
     public WebElement addToCartButton;
 
@@ -31,13 +30,21 @@ public class ProdectPage extends BasePage {
 
     @FindBy(id = "bidBtn_btn")
     public WebElement placeBidButton;
-
-
+    @FindBy (xpath = "//a/span[text()='Add to Watchlist']")
+    public WebElement watchlistButton;
+    @FindBy(xpath = "//h1/span[text()='jordan 4 levis ']")
+    public WebElement modelName;
 
 
     //method region
     public void clickOnAddPlanNo(){
         safeClickOnElement(addPlanNo);
+    }
+    public void clickOnBrand(WebElement brand){
+        safeClickOnElement(brand);
+    }
+    public void clickOnAddToWatch(){
+        safeClickOnElement(watchlistButton);
     }
     public CartPage clickOnAddToCart(){
         safeClickOnElement(addToCartButton);
@@ -49,13 +56,17 @@ public class ProdectPage extends BasePage {
     }
     public void clickOnCheckoutAsGuest(){
         safeClickOnElement(checkoutAsGuestButton);
+
     }
-    public CheckoutPage goToCheckoutAsGuest(){
-        clickOnBuyButton();
-        clickOnAddPlanNo();
-        clickOnCheckoutAsGuest();
-        return new CheckoutPage();
+    public String getItemName(){
+        return  getTrimmedElementText(modelName);
     }
+//    public CheckoutPage goToCheckoutAsGuest(){
+//        clickOnBuyButton();
+//        clickOnAddPlanNo();
+//        clickOnCheckoutAsGuest();
+//        return new CheckoutPage();
+//    }
 
 
     public void setInputBid(String amount){
@@ -64,11 +75,11 @@ public class ProdectPage extends BasePage {
     public void clickOnPlaceBidButton(){
         safeClickOnElement(placeBidButton);
     }
-    public SignInPage doBid(String amount){
-        setInputBid(amount);
-        clickOnPlaceBidButton();
-        return new SignInPage();
-    }
+//    public SignInPage doBid(String amount){
+//        setInputBid(amount);
+//        clickOnPlaceBidButton();
+//        return new SignInPage();
+//    }
 
 
 }
