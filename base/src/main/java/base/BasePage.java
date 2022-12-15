@@ -79,7 +79,11 @@ public BasePage(){
 
     @Parameters({"driverConfigEnabled", "browser", "url"})
     @BeforeMethod
+<<<<<<< HEAD
+    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("https://www.ebay.com") String url) {
+=======
     public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("https://www.apartments.com") String url) {
+>>>>>>> 18b4006421445f26ff2df87e2cde4808f8fba218
         if (Boolean.parseBoolean(driverConfigEnabled)) {
             driverInit(browser);
             driver.get(url);
@@ -180,6 +184,16 @@ public BasePage(){
 
         return text;
     }
+    public List<String> getListTrimmedElements(List<WebElement> listElements) {
+        List<String> list = new ArrayList<String>();
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(listElements));
+        for (WebElement element : listElements) {
+            list.add(getTrimmedElementText(element));
+        }
+        return list;
+    }
+
+
     public List<String> getListTrimmedElements(List<WebElement> listElements) {
         List<String> list = new ArrayList<String>();
         webDriverWait.until(ExpectedConditions.visibilityOfAllElements(listElements));
